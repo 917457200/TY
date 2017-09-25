@@ -1,0 +1,4 @@
+                    string secretKey = @"furture#$eccs&";
+                    string ts = DateTime.Now.Second.ToString();
+                    string userToken = FormsAuthentication.HashPasswordForStoringInConfigFile( Request.Cookies["AUserCode"].Value + ts + secretKey, "MD5" );
+                    ECCLink.NavigateUrl = @"http://wx.zhengzhong.cn:8004/externalLogin.html?code=" + Request.Cookies["AUserCode"].Value + @"&type=1&ts=" + ts + @"&userToken=" + userToken;

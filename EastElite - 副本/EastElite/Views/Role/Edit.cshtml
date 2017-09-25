@@ -1,0 +1,74 @@
+﻿@model  BLL.SMSModel.RoleInfo
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/MP.cshtml";
+}
+<body class="errorpage">
+    <div class="stdform">
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div class="widget">
+                    <h4 class="widgettitle">修改系统角色</h4>
+                    <div class="widgetcontent">
+                        @using( Html.BeginForm( "Edit", "Role", FormMethod.Post, new { enctype = "multipart/form-data" } ) )
+                        {
+                            @Html.ValidationSummary( true )
+                            @Html.HiddenFor( model => model.Code )
+                            <div class="par control-group">
+                                <div class="label-left">
+                                    角色名称
+                                </div>
+                                <div class="controls">
+                                    @Html.TextBoxFor( model => model.Name, new { @class = "input1" } )
+                                    <span style="color: red">*</span>
+                                    @Html.ValidationMessageFor( model => model.Name )
+                                </div>
+                            </div>
+                            
+                                <div class="par control-group oh">
+                                    <div class="label-left">
+                                        系统权限
+                                    </div>
+                                    <div class="controls2">
+                                        @foreach( var item in ViewBag.Link )
+                                    {
+                                        if( ViewBag.OaRole.Contains( "★" + item.Code.ToString() + "★" ) )
+                                        {
+                                    <div class="lingDiv">
+                                        <input type="checkbox" checked="checked" name="Link" id="Link@(item.Code)" value="@(item.Code)" />
+                                        <label for="Link@(item.Code)">@item.oaName</label>
+                                    </div>
+                                        }
+                                        else
+                                        {
+                                    <div class="lingDiv  @ViewBag.OaRole">
+                                        <input type="checkbox" name="Link" id="Link@(item.Code)" value="@(item.Code)" />
+                                        <label for="Link@(item.Code)">@item.oaName</label>
+                                    </div>
+                                        }
+
+                                    }
+                                    </div>
+                                </div>
+                           
+                            <div class="par control-group">
+                                <div class="label-left">
+                                    备注
+                                </div>
+                                <div class="controls">
+                                    @Html.TextBoxFor( model => model.Note, new { @class = "input1" } )
+                                    <span style="color: red">*</span>
+                                    @Html.ValidationMessageFor( model => model.Note )
+                                </div>
+                            </div>
+                            <p class="stdformbutton" style="text-align:center;">
+                                <input class="btn" type="submit" style="display:inline-block;" value="提交" />
+                                <input class="btn" type="submit" style="display:inline-block;" onclick=" location.href = 'RoleList'; return false;" value="返回" />
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

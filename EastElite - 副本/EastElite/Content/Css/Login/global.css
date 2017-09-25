@@ -1,0 +1,57 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+
+html,body{
+	font-size:12px;
+	font-family: Microsoft YaHei,SimSun;
+	font-weight: normal;
+	line-height:22px;
+	color: black;
+}
+body{
+	overflow-y:scroll;
+	*overflow-y:hidden;
+}
+table {
+	table-layout: fixed;
+	border-spacing: 0px;
+}
+img{
+	border:none;
+}
+input[type='checkbox'],
+input[type='radio']{
+	height:13px; 
+	vertical-align:middle;
+	margin: 0px 5px 1px 5px;
+}
+input[type='text'],
+input[type='password']{
+	padding:2px;
+	height: 18px;
+}
+select{
+	padding:2px;
+}
+a.common-link{
+	text-decoration: none;
+	color: #0f24ef;
+	font-weight: normal;
+	cursor: pointer;
+}
+a.common-link:HOVER {
+	text-decoration: underline;
+	color: #551b8b;
+}
+.nowrap-ellipsis{
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+}
+.form-control::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+}

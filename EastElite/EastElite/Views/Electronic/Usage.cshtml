@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Usage";
+    Layout = "~/Views/Shared/MP.cshtml";
+}
+<div class="maincontent">
+    <div class="maincontentinner">
+        <div role="grid" class="dataTables_wrapper" id="dyntable_wrapper">
+            <div id="dyntable_length" class="dataTables_length">
+                &nbsp;
+            </div>
+
+            <div class="dataTables_filter" id="dyntable_filter">
+                <span style="float: left;">校区 </span>
+                <select id="txtName" style="float: left; margin-left:10px;">
+                    <option value="">请选择</option>
+                    <option value="6101051006">校本部</option>
+                    <option value="6101051007">东校区</option>
+                </select>
+                <span style="float: left; margin-left: 10px;">年级</span>
+                <select id="GradeCode" style="float: left; margin-left:10px;">
+                </select>
+                <span style="float: left; margin-left: 10px;">班级</span>
+                <select id="ClassCode" style="float: left; margin-left:10px;"></select>
+                <label class="btn" style="float: right; padding: 1px 6px 0px;" id="btnSearch">查询</label>
+            </div>
+        </div>
+        <table class="gridView table table-bordered responsive dataTable" width="100%">
+            <tr>
+                <th align="center" width="5%" class="head0">校区</th>
+                <th align="center" width="12%" class="head0">班级</th>
+                <th align="center" width="6%" class="head0">班主任</th>
+                <th align="center" width="9%" class="head0">设备编号</th>
+                <th align="center" width="20%" class="head0">JPushID</th>
+                <th align="center" width="13%" class="head0">最新任务时间</th>
+                <th align="center" width="9%" class="head0">开关机时间</th>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div id="popup_overlay" style="position: absolute; z-index: 99998; display: none; top: 0px; left: 0px; width: 100%;  background: none repeat scroll 0% 0% rgb(255, 255, 255); opacity: 0.01;"></div>
+
+<!--弹出层  删除-->
+<div id="popup_container" style="position: fixed; z-index: 99999; padding: 0px; display: none; margin: 0px; min-width: 300px; max-width: 300px;" class="ui-draggable">
+</div>
+
+@section Script
+    {
+    <script src="~/Scripts/Page.js"></script>
+<script src="~/Scripts/json2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            Query(1);
+            var userCode = '@ViewBag.User.userCode';
+            var rootCode = '@ViewBag.User.rootCode';
+          
+            GetGradeCode(userCode, rootCode);
+            $("#ClassCode").append("<option selected=\"selected\" value=\"\">请选择</option>");
+            $("#GradeCode").change(function(){
+                GetClassCode(userCode, rootCode);
+            })
+        })
+        ///分页检索
+        ///参数pageIndex：页码
+        function Query(pageIndex) {
+            var values = ["CampusName", "ClassName", "BanZhuRenName", "DeviceCode", "JPushID", "TastDate", "SwitchDate"];//列对应的字段值
+            var postUrl = "/Ajax/GetElectronicData";
+            GetElectronicData(postUrl, values, pageIndex);
+        }
+        //分页表格数据绑定
+        function GetElectronicData(postUrl, values, pageIndex) {
+            var userCode = '@ViewBag.User.userCode';
+            var rootCode = '@ViewBag.User.rootCode';
+            var ClassCode = $("#ClassCode").val();
+            var rootCode = $("#txtName").val();
+            var gradeCode = $("#GradeCode").val();
+            if (pageIndex <= 0) { pageIndex = 1; }
+            $.post(postUrl, {
+                ClassCode: ClassCode,
+                pageIndex: pageIndex,
+                gradeCode: gradeCode,
+                rootCode: rootCode
+            }, function (e) {
+                var Data = JSON.parse(e);
+                pageIndex = Data.currentPage;
+                BondData(Data.data, values, pageIndex);//绑定数据
+                Page(pageIndex, Data.totalPage, values.length);//设置分页
+                GetH();
+            })
+        }
+        //年级
+        function GetGradeCode(userCode, rootCode) {
+            var postUrl = "/Ajax/GetGradeCode";
+            
+            $.post(postUrl , {
+                rootCode: rootCode,
+                userCode: userCode
+            }, function (e) {
+                var Data = e.data;
+                var result = "";
+                var GradeCode = $("#GradeCode");
+                for (var i = 0; i < Data.length; i++) {
+                    if (i == 0) {//当页码与选择框value相等时，设置状态为选中状态
+                        result = result + "<option selected=\"selected\" value=\"\">请选择</option>";
+                        result = result + "<option value=" + Data[i].gradeCode + ">" + Data[i].gradeName + "</option>";
+                    } else if (Data[i].gradeCode=="") {
+
+                    } else {
+                        result = result + "<option value=" + Data[i].gradeCode + ">" + Data[i].gradeName + "</option>";
+                    }
+                }
+                GradeCode.html(result);
+            }, "json")
+        }
+        //班级
+        function GetClassCode(userCode, rootCode) {
+            var postUrl = "/Ajax/GetClassCode";
+            var gradeCode = $("#GradeCode").val();
+            $.post(postUrl, {
+                rootCode: rootCode,
+                userCode: userCode,
+                gradeCode: gradeCode
+            }, function (e) {
+                var Data = JSON.parse(e).data;
+                var result = "";
+                var GradeCode = $("#ClassCode");
+                result = result + "<option selected=\"selected\" value=\"\">请选择</option>";
+                for (var i = 0; i < Data.length; i++) {
+                     if (Data[i].gradeCode != "") {
+                        result = result + "<option value=" + Data[i].ClassCode + ">" + Data[i].ClassName + "</option>";
+                    }
+                }
+                GradeCode.html(result);
+            })
+        }
+     
+        function Delete(data) {
+            window.location.href = "Del?code=" + data;
+        }
+        $("#btnSearch").bind('click', function () {
+            Query(1);
+        })
+
+    </script>
+}
+

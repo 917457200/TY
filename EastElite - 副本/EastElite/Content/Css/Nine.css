@@ -1,0 +1,45 @@
+﻿body { background-color: #fff9f9; }
+
+.List, .Thisrow1 { height: 25%; width: 100%; }
+
+    .List .Thisrow1 { height: 100%; }
+
+.container-fluid { padding-left: 0px; padding-right: 0px; }
+.grid { padding: 0px; position: relative; height: 95%; }
+
+    .grid:last-child { height: 100%; }
+
+    .grid a { margin-top: 1.5%; width: 97%; height: 97%; display: block; color: white; border: 1px solid #007acc; text-align: center; border-radius: 15px; transition: all 0.4s ease-in-out 0s; cursor: pointer; text-decoration: none; }
+
+
+        .grid a:hover { transform: rotate(360deg); }
+
+    .grid > a > img { margin-top: 10%; position: absolute; top: 0px; left: 20%; z-index: 999; width: 60%; height: 55%; }
+
+    .grid > a > .back-color { position: absolute; top: 0px; left: 20%; background: #0066cc; margin-top: 10%; width: 60%; height: 55%; z-index: 99; }
+
+    .grid > a > span { display: block; color: #0066cc; font-size: 1.2em; font-weight: bold; height: 10%; position: absolute; top: 72%; left: 0px; width: 100%; }
+#user { position:relative; }
+.userBox { position:absolute;left :10%;top:25%;width:80%; height:50%;}
+.gridDiv { text-align: left; font-size: 13px; width:125px; margin:0px auto; font-weight: bold; line-height: 200%; padding-left: 25px;color:#0066cc ; }
+#UserName { background: url('../Img/UserRen.png') no-repeat left 3px; }
+#UserBU { background: url('../Img/UserBU.png') no-repeat left 3px; }
+#UserSchool { background: url('../Img/UserSchool.png') no-repeat left 3px; }
+
+.win { position: absolute; top: 0px; left: 5%; bottom: 0px; height: 100%; right: 5%; padding: 50px 0px; }
+
+.col-xs-71 { width: 16.66666666666667%; float: left; min-height: 1px; position: relative; }
+
+.col-xs-72 { width: 16.66666666666667%; min-height: 1px; float: left; display: block; }
+
+.col-xs-offset-71 { margin-left: 83.33333333333333%; }
+
+.win2 { width: 90%; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; padding: 10% 0px 0px 0px; }
+
+.col-xs-81 { width: 16.66666666666667%; float: left; min-height: 1px; position: relative; }
+.col-xs-top { width: 16.66666666666667%; float: left; min-height: 1px; position: relative; }
+.err { display: none; width: 473px; margin: 25% auto 0px auto; }
+
+.grid-menu-left { background: url('/Content/Img/Jian.png') no-repeat 0px 0px; width: 23px; height: 23px; position: absolute; left: 5px; top: 35%; z-index: 999; cursor: pointer; }
+
+.grid-menu-right { background: url('/Content/Img/Jian.png') no-repeat -106px 0px; width: 23px; height: 23px; position: absolute; right: 5px; top: 35%; z-index: 999; cursor: pointer; }

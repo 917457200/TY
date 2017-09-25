@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "UserRoleList";
+    Layout = "~/Views/Shared/MP.cshtml";
+
+}
+<div class="maincontent">
+    <div class="maincontentinner">
+
+        <div role="grid" class="dataTables_wrapper" id="dyntable_wrapper">
+            <div id="dyntable_length" class="dataTables_length">
+                &nbsp;
+            </div>
+
+            <div class="dataTables_filter" id="dyntable_filter">
+                <span>处室/教研组</span>
+                <select id="AgencyList">
+                    @for( int i = 0; i < ViewBag.Agencylists.Count; i++ )
+                    {
+                        <option value="@ViewBag.Agencylists[i]">@ViewBag.Agencylists[i]</option>
+                    }
+                </select>
+                <span>教师姓名</span>
+                <input id="UserName" type="text" placeholder="输入教师姓名" />
+                <label class="btn" style=" padding: 1px 6px 0px; float: right" id="btnSearch">查询</label>
+            </div>
+        </div>
+
+        <table class="gridView table table-bordered responsive dataTable" width="100%">
+            <tr>
+                <th align="center" width="80" class="head0">用户代码</th>
+                <th align="center" width="80" class="head0">用户姓名</th>
+                <th align="center" width="80" class="head0">处室/教研组</th>
+                <th align="center" width="100" class="head0">操作</th>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div id="popup_overlay" style="position: absolute; z-index: 99998; display: none; top: 0px; left: 0px; bottom:0; right:0px; width: 100%;  background: none repeat scroll 0% 0% rgb(255, 255, 255); opacity: 0.01;"></div>
+
+<!--指定负责人-->
+<div id="Divuser" style="position: fixed; z-index: 999999; padding: 0px; display: none; margin: 0px; width: 700px;" class="popup_container ui-draggable">
+    <div class="widget">
+        <h4 class="widgettitle">角色列表<span class="icon-fullscreen" onclick="$.closezhezhao('Divuser', 'popup_overlay')"></span></h4>
+        <div class="widgetcontent" style="margin-bottom: 0px;">
+            <div class="stdform" style="margin-bottom: 0px;">
+                <input type="hidden" id="UserCode" />
+                <input type="hidden" id="UserType" />
+                <input type="hidden" id="Name" />
+
+                <div class="par control-group" id="userTable" style="height: 190px; margin:0px 0px 10px 0px; overflow-y: auto;">
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button id="BtnOKUser" class="btn btn-primary">
+                    提 交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script
+    {
+    <script src="~/Scripts/Page.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //指定负责人事件
+            $("#BtnOKUser").on('click', function () {
+                var IsX = false;
+                var Ids = "";
+                $("#DepartmentTb tr td").each(function () { //获取所有的td
+                    var color = $(this).getHexBackgroundColor().toString();
+                    if ((color.indexOf("rgb") == 0 && color == "rgb(220, 161, 3)") || color == "#dca103") { //判断颜色为#ffee5a或rgb(0, 128, 0)，则为选中
+                        Ids += $(this).attr("id") + ",";
+                        IsX = true;
+                    }
+                })
+                if (!IsX) {
+                    alert("请先选择角色！");
+                    return IsX;
+                } else {
+                    Ids = Ids.substring(0, Ids.length - 1);
+                    $.post("/UserRoleInfo/AddRoleList", {
+                        UserCode: $("#UserCode").val(),
+                        UserType: $("#UserType").val(),
+                        RoleCode: Ids,
+                        UserName: $("#Name").val()
+
+                    }, function () {
+                        alert("授权成功！");
+                        $("#Divuser").fadeOut(1000);
+                        $("#popup_overlay").fadeOut(1000);
+                        Query(1);
+                    });
+                }
+            });
+        })
+        Query(1);
+        ///分页检索
+        ///参数pageIndex：页码
+        function Query(pageIndex) {
+            var values = ["UserCode", "UserName", "AgencyName", "操作"];//列对应的字段值
+            var postUrl = '/Ajax/GetUserList';
+            var SubAgencyCode = $("#AgencyList").val().trim();//处室/教研组
+            var UserName = $("#UserName").val().trim();//角色列表
+            var strWhere = "";
+            if (SubAgencyCode != null && SubAgencyCode != "")
+                strWhere = SubAgencyCode;
+            if (UserName != null && UserName != "")
+                strWhere += "★" + UserName;
+            GetData(postUrl, values, pageIndex, strWhere);
+        }
+        //设置表格的操作列内的button
+        //参数model:本行数据
+        function SetOperate(model) {
+            var str = "<td align=\"center\">"
+            str += "<span class='btn btn-primary' style=\"color:#fff;\" onclick=\"javascript:TransferUser('Divuser','popup_overlay','" + model.UserCode + "','" + model.UserType + "','" + model.UserName + "')\">分配角色</span>";
+            str += "</td>";
+            return str;
+        }
+        //初始化北京颜色方法
+        $.fn.getHexBackgroundColor = function () {
+            var rgb = $(this).css('background-color');
+            return rgb;
+        }
+        //指定负责人框框选择事件
+        function ChangeUser(Code) {
+            var colo = $("#" + Code).getHexBackgroundColor();
+            if ((colo.indexOf("rgb") == 0 && colo == "rgb(220, 161, 3)") || colo == "#dca103")
+            {
+                var c = getCookie('skin-color');
+                switch (c) {
+                    case "default":
+                        $("#" + Code).css("background", "#62baec");
+                        break;
+                    case "red":
+                        $("#" + Code).css("background", "#d3401e");
+                        break;
+
+                    case "green":
+                        $("#" + Code).css("background", "#52cb30");
+                        break;
+
+                    case "brown":
+                        $("#" + Code).css("background", "#6c5c51");
+                        break;
+
+                    default:
+                        $("#" + Code).css("background", "#62baec");
+                        break;
+                }
+                return;
+            }
+            else {
+                $("#" + Code).css("background", "#dca103");
+                return;
+            }
+        }
+        //定位及显示
+        function TransferUser(elem, fullbg, id, type,name) {
+            $("#userTable").empty();
+            $("#UserCode").val(id);
+            $("#UserType").val(type);
+            $("#Name").val(name);
+            $.ajax({
+                type: "POST",
+                url: "/Ajax/GetRole",
+                data: "Code=" + id,
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    arr = data.UserRoleStr;
+                    if (data.model.length != 0) {
+                        var string = "<table width=\"100%\" id=\"DepartmentTb\"><tr>";
+                        $.each(data.model, function (i, n) {
+                            if (i % 4 == 0) {
+                                string += "</tr><tr>";
+                            }
+                            var cla = arr.indexOf(n.Code) > -1 ? " btn-green btn-primary" : "btn btn-primary";
+                            string += "<td id='" + n.Code + "' onclick=\"ChangeUser('" + n.Code + "')\" class=\"" + cla +
+                                "\"  width=\"21%\" style=\"margin-left:5px; margin-bottom:5px;\">" + n.Name + "</td>";
+
+                        });
+                        string += "</tr></table>";
+                        $("#userTable").append(string);
+                        //弹出层定位
+                        var h = document.documentElement;
+                        var w = ($(document).width() - $("#" + elem).width()) / 2;
+                        $("#" + elem).css("top", ((h.clientHeight - $("#" + elem).height()) / 2) + "px");
+                        $("#" + elem).css("left", w + "px");
+                        $("#" + fullbg).fadeIn(1000);
+                        $("#" + elem).fadeIn(1000);
+                    } else {
+                        alert("未检索到角色！");
+                    }
+
+                }
+            });
+        }
+
+      
+        
+        $("#btnSearch").bind('click', function () {
+            Query(1);
+        })
+
+    </script>
+}
+

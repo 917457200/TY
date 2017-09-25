@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "RoleList";
+    Layout = "~/Views/Shared/MP.cshtml";
+}
+<div class="maincontent">
+    <div class="maincontentinner">
+        
+        <div role="grid" class="dataTables_wrapper" id="dyntable_wrapper">
+            <div id="dyntable_length" class="dataTables_length">
+                <a href="../Role/Add" target="left" class="addImgs" style=" color:white;">添加</a>
+            </div>
+
+            <div class="dataTables_filter" id="dyntable_filter">
+                <input type="text" id="txtName" style="float: left;" placeholder="输入系角色名称" />
+                <label class="btn" style="float: left; padding: 1px 6px 0px;" id="btnSearch">查询</label>
+            </div>
+        </div>
+
+        <table class="gridView table table-bordered responsive dataTable" width="100%">
+            <tr>
+                <th align="center" width="100" class="head0">角色编号</th>
+                <th align="center" width="200" class="head0">角色名称</th>
+                <th align="center" width="150" class="head0">创建日期</th>
+                <th align="center"  class="head0">备注</th>
+
+                <th align="center" width="100" class="head0">操作</th>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div id="popup_overlay" style="position: absolute; z-index: 99998; display: none; top: 0px; left: 0px; width: 100%; background: none repeat scroll 0% 0% rgb(255, 255, 255); opacity: 0.01;"></div>
+
+<!--弹出层  删除-->
+<div id="popup_container" style="position: fixed; z-index: 99999; padding: 0px; display: none; margin: 0px; min-width: 300px; max-width: 300px;" class="ui-draggable">
+</div>
+
+@section Script
+    {
+<script src="~/Scripts/Page.js"></script>
+
+    <script type="text/javascript">
+        Query(1);
+        ///分页检索
+        ///参数pageIndex：页码
+        function Query(pageIndex) {
+            var values = ["Code", "Name", "HandledDate", "Note", "操作"];//列对应的字段值
+            var postUrl = '/Ajax/GetRoleList';
+            var Name = $("#txtName") .val().trim();//公司名称
+            var strWhere = "";
+            if (Name != null && Name != "")
+                strWhere = Name;
+            GetData(postUrl, values, pageIndex, strWhere);
+            }
+            //设置表格的操作列内的button
+            //参数model:本行数据
+            function SetOperate(model) {
+                var str = "<td align=\"center\">"
+                str += '<a class="btn btn-primary" style="color:#fff;" href="/Role/Edit?code=' + model.Code + '">更新</a>';
+                str += "<span class='btn btn-primary' style=\"color:#fff;\"onclick=\"Transfer('" + model.Code + "','角色')\">删除</span>";
+                str += "</td>";
+                return str;
+            }
+           
+            function Delete(data) {
+                var url = "Del";
+                var par = "code=" + data;
+                EDUCAjax(par, function () {},
+                function () { alert("删除成功！"); window.location.href = window.location.href;}, url, "html", false, "数据加载中，请耐心等待...", true);
+            }
+            $("#btnSearch").bind('click', function () {
+                Query(1);
+            })
+
+    </script>
+}
+

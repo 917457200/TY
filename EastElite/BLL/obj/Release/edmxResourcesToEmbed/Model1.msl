@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NETDISKDBModelStoreContainer" CdmEntityContainer="NETDISKDBEntities">
+    <EntitySetMapping Name="Link">
+      <EntityTypeMapping TypeName="NETDISKDBModel.Link">
+        <MappingFragment StoreEntitySet="Link">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="oaName" ColumnName="oaName" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="sort" ColumnName="sort" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menu">
+      <EntityTypeMapping TypeName="NETDISKDBModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OaRole">
+      <EntityTypeMapping TypeName="NETDISKDBModel.OaRole">
+        <MappingFragment StoreEntitySet="OaRole">
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="LinkCode" ColumnName="LinkCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLog">
+      <EntityTypeMapping TypeName="NETDISKDBModel.UserLog">
+        <MappingFragment StoreEntitySet="UserLog">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LogCreatTime" ColumnName="LogCreatTime" />
+          <ScalarProperty Name="LogNote" ColumnName="LogNote" />
+          <ScalarProperty Name="LogName" ColumnName="LogName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

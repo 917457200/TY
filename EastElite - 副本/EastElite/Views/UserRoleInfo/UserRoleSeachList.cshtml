@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "UserRoleList";
+    Layout = "~/Views/Shared/MP.cshtml";
+}
+<div class="maincontent">
+    <div class="maincontentinner">
+
+        <div role="grid" class="dataTables_wrapper" id="dyntable_wrapper">
+            <div id="dyntable_length" class="dataTables_length">
+            &nbsp;
+            </div>
+
+            <div class="dataTables_filter" id="dyntable_filter">
+                <span>处室/教研组</span>
+                <select id="AgencyList">
+                    @for( int i = 0; i < ViewBag.Agencylists.Count; i++ )
+                    {
+                        <option value="@ViewBag.Agencylists[i]">@ViewBag.Agencylists[i]</option>
+                    }
+                </select>
+                <span>角色列表</span>
+                <select id="Rolelist">
+                    @for( int i = 0; i < ViewBag.Rolelists.Count; i++ )
+                    {
+                        <option value="@ViewBag.Rolelists[i]">@ViewBag.Rolelists[i]</option>
+                    }
+                </select>
+                <label class="btn" style=" padding: 1px 6px 0px;" id="btnSearch">查询</label>
+            </div>
+        </div>
+
+        <table class="gridView table table-bordered responsive dataTable" width="100%">
+            <tr>
+                <th align="center" width="80" class="head0">用户代码</th>
+                <th align="center" width="80" class="head0">用户姓名</th>
+                <th align="center" width="80" class="head0">处室/教研组</th>
+                <th align="center" width="80" class="head0">角色代码</th>
+                <th align="center" width="80" class="head0">角色名称</th>
+                <th align="center" width="100" class="head0">批准人</th>
+                <th align="center" width="100" class="head0">批准日期</th>
+                <th align="center" width="100" class="head0">操作</th>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div id="popup_overlay" style="position: absolute; z-index: 99998; display: none; top: 0px; left: 0px; width: 100%;  background: none repeat scroll 0% 0% rgb(255, 255, 255); opacity: 0.01;"></div>
+
+<!--弹出层  删除-->
+<div id="popup_container" style="position: fixed; z-index: 99999; padding: 0px; display: none; margin: 0px; min-width: 300px; max-width: 300px;" class="ui-draggable">
+</div>
+
+@section Script
+    {
+    <script src="~/Scripts/Page.js"></script>
+
+    <script type="text/javascript">
+        Query(1);
+        ///分页检索
+        ///参数pageIndex：页码
+        function Query(pageIndex) {
+            var values = ["UserCode", "UserName", "AgencyName", "RoleCode", "RoleName", "HandledName", "HandledDate", "操作"];//列对应的字段值
+            var postUrl = '/Ajax/GetUserRoleList';
+            var SubAgencyCode = $("#AgencyList").val().trim();//处室/教研组
+            var RoleName = $("#Rolelist").val().trim();//角色列表
+            var strWhere = "";
+            if (SubAgencyCode != null && SubAgencyCode != "")
+                strWhere = SubAgencyCode;
+            if (RoleName != null && RoleName != "")
+                strWhere += "★" + RoleName;
+            GetData(postUrl, values, pageIndex, strWhere);
+        }
+        //设置表格的操作列内的button
+        //参数model:本行数据
+        function SetOperate(model) {
+            var str = "<td align=\"center\">"
+            str += "<span class='btn btn-primary' style=\"color:#fff;\"onclick=\"Transfer('" + model.ID + "','条用户角色分配信息','" + model.RoleName + "','" + model.UserName + "')\">删除</span>";
+            str += "</td>";
+            return str;
+        }
+        function Transfer(Code, name, RoleName, UserName) {
+            var kuan = "";
+            $("#popup_container").html(kuan);
+            kuan = kuan + " <h1 id=\"popup_title\"class=\"widgettitle\" style=\"cursor: move;\">提示</h1><div id=\"popup_content\" class=\"widgetcontent\">";
+            kuan = kuan + "  <div id=\"popup_message\">确定删除此" + name + "吗？</div>  <div id=\"popup_panel\">";
+            kuan = kuan + " <input type=\"button\" id=\"popup_ok\" class=\"widgetcontent\" value=\"确定\" onclick=\"Delete('" + Code + "','" + RoleName + "','" + UserName + "')\">";
+            kuan = kuan + "  <input type=\"button\" id=\"popup_cancel\"class=\"widgetcontent\" onclick=\"$.closezhezhao('popup_container','popup_overlay')\" value=\"取消\"></div></div>";
+            $("#popup_container").append(kuan);
+            $.dingwei('popup_container', 'popup_overlay');
+        }
+
+
+        function Delete(data, RoleName, UserName) {
+            var url = "Del";
+            var par = "Code=" + data + "&RoleName=" + RoleName + "&UserName=" + UserName;
+            EDUCAjax(par, function () { },
+            function () { alert("删除成功！"); Query(1); $.closezhezhao('popup_container', 'popup_overlay');}, url, "html", false, "数据加载中，请耐心等待...", true);
+        }
+        $("#btnSearch").bind('click', function () {
+            Query(1);
+        })
+
+    </script>
+}
+

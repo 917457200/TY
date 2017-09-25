@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/MP.cshtml";
+    
+}
+<div class="maincontent">
+    <div class="maincontentinner">
+        @*  <h4 class="widgettitle">公司管理列表</h4>*@
+        <div role="grid" class="dataTables_wrapper" id="dyntable_wrapper">
+            <div id="dyntable_length" class="dataTables_length">
+               &nbsp;
+            </div>
+
+            <div class="dataTables_filter" id="dyntable_filter">
+                <span style="float: left;">系统名称</span>
+                <input type="text" id="txtName" style="float: left;" placeholder="输入系统名称" />
+                <label class="btn" style="float: right; padding: 1px 6px 0px;" id="btnSearch">查询</label>
+                <label class="btn" style="float: right; padding: 1px 6px 0px;" id="btnSearch"><a href="/Link/Add" target="left" style=" color:white;">添加</a></label>
+                <label class="btn" style="float: right; padding: 1px 6px 0px;" id="btnSearch"><a href="/Link/Pai" target="left" style=" color:white;">排序</a></label>
+            </div>
+        </div>
+
+        <table class="gridView table table-bordered responsive dataTable" width="100%">
+            <tr>
+                <th align="center" class="head0">系统名称</th>
+                <th align="center" class="head0">系统地址</th>
+                <th align="center" class="head0">系统排序</th>
+                <th align="center" class="head0">操作</th>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+
+
+<div id="popup_overlay" style="position: absolute; z-index: 99998; display: none; top: 0px; left: 0px; width: 100%;  background: none repeat scroll 0% 0% rgb(255, 255, 255); opacity: 0.01;"></div>
+
+<!--弹出层  删除-->
+<div id="popup_container" style="position: fixed; z-index: 99999; padding: 0px; display: none; margin: 0px; min-width: 300px; max-width: 300px;" class="ui-draggable">
+</div>
+
+@section Script
+    {
+<script src="~/Scripts/Page.js"></script>
+
+    <script type="text/javascript">
+        Query(1);
+        ///分页检索
+        ///参数pageIndex：页码
+        function Query(pageIndex) {
+            var values = ["oaName", "link", "sort", "操作"];//列对应的字段值
+            var postUrl = '/Ajax/GetLink';
+            var Name = $("#txtName").val().trim();//公司名称
+            var strWhere = "";
+            if (Name != null && Name != "")
+                strWhere = Name;
+            GetData(postUrl, values, pageIndex, strWhere);
+            }
+            //设置表格的操作列内的button
+            //参数model:本行数据
+            function SetOperate(model) {
+                var str = "<td align=\"center\">"
+                str += '<a class="btn btn-primary" style="color:#fff;" href="/Link/Edit?code=' + model.Code + '">更新</a>';
+                str += "<span class='btn btn-primary' style=\"color:#fff;\"onclick=\"Transfer('" + model.Code + "','系统')\">删除</span>";
+                str += "</td>";
+                return str;
+            }
+            function Delete(data) {
+                window.location.href = "Del?code=" + data;
+            }
+            $("#btnSearch").bind('click', function () {
+                Query(1);
+            })
+
+    </script>
+}
+

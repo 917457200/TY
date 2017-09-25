@@ -1,0 +1,90 @@
+﻿@model BLL.Cookie.TeUser
+@{
+    ViewBag.Title = "Index";
+}
+@section Head{
+    <script src="~/Scripts/WEB/WebJs.js" type="text/javascript"></script>
+    <script src="~/Scripts/WEB/Home.js" type="text/javascript"></script>
+    <link href="~/Content/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Css/SiteIndex.css" rel="stylesheet" />
+    <link href="~/Content/Css/Nine.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(function () {
+            $(".flip").bind("click", function () {
+                $(this).addClass("in").removeClass("out");
+                $(this).addClass("out").removeClass("in");
+            });
+            Dfbg.OA.Home.GetMeun();
+        })
+    </script>
+}
+<body>
+    <div class="navbar navbar-primary b-b" id="head">
+        <div class="bg-light b-b navbar-top">
+            <div class="container clearfix">
+                <span>欢迎使用</span>
+                <span class="text-primary">统一管理平台系统</span>
+                <div class="pull-right" id="logoutForm">
+                    <ul class="reset login-wrapper">
+                        <li>
+                            <span id="loginuser">您好 , @Model.userName</span>
+                        </li>
+                        <li class="divider">
+                            <span>&nbsp;</span>
+                        </li>
+                        <li>
+                            <a id="loginout" href="/Home/OutLogin">退出</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container m-b-n">
+            <div class="row">
+                <div class="col-md-8 col-xs-8">
+                    <a href="#">
+                        <img style="height: 60px;" src="~/Content/Img/logo.png">
+                        <span class="text-black text-big"></span>
+                    </a>
+                </div>
+                <div class="col-md-4 col-xs-4">
+                    <div id="searchForm" action="#" class="input-group m-t-l">
+                        <input type="text" autocomplete="off" placeholder="请输入关键字" class="form-control" name="keyword">
+                        <div class="input-group-btn dropdown">
+                            <button type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <span>搜索</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-primary">
+            <div id="navMain" class="container nav-main">
+                <a class="active" href="/Home/Index">
+                    <span>系统首页</span>
+                </a>
+              @if( ViewBag.IsAdmin )
+                    {  <a href="/Manage/Index">后台管理</a>}
+            </div>
+        </div>
+    </div>
+    <div id="bodyContent" class="body-content">
+        <div class="container container-fluid win">
+            <div class="err">
+                <div style="width: 473px; text-align: center;">您没有可操作的系统权限，请联系管理员！</div>
+                <img src="~/Content/xinjiemian/404.png" />
+            </div>
+            <div class="List container-fluid">
+                <div class="Thisrow1 ListImg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+            <p>东方博冠（北京）科技有限公司 版权所有 &copy;2016-2020</p>
+    </div>
+    
+</body>

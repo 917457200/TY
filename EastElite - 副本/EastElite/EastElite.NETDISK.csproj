@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{29D55F75-A29C-418C-939D-AEEF7D5EE39C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EastElite</RootNamespace>
+    <AssemblyName>EastElite</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EastElite.SMS.Business, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BLL\bin\EastElite.SMS.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinkController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserlogController.cs" />
+    <Compile Include="Controllers\UserRoleInfoController.cs" />
+    <Compile Include="Controllers\VidoLoginController.cs" />
+    <Compile Include="Core\ImageResult.cs" />
+    <Compile Include="Core\LoginFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\EastEliteICMSWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Css\animate.min.css" />
+    <Content Include="Content\Css\bootstrap.css" />
+    <Content Include="Content\Css\bootstrap.min.css" />
+    <Content Include="Content\Css\CSS.css" />
+    <Content Include="Content\Css\CSS_two.css" />
+    <Content Include="Content\Css\font-awesome.min.css" />
+    <Content Include="Content\Css\jquery.alerts.css" />
+    <Content Include="Content\Css\jquery.ui.css" />
+    <Content Include="Content\Css\Login\brower-tip-bg.png" />
+    <Content Include="Content\Css\Login\brower-tip-error.png" />
+    <Content Include="Content\Css\Login\global.css" />
+    <Content Include="Content\Css\Login\jquery.flexslider-min.js" />
+    <Content Include="Content\Css\Login\jquery.pngFix.pack.js" />
+    <Content Include="Content\Css\Login\login-banner-picker-active.png" />
+    <Content Include="Content\Css\Login\login-banner-picker.png" />
+    <Content Include="Content\Css\Login\login.css" />
+    <Content Include="Content\Css\Login\loginIpt.png" />
+    <Content Include="Content\Css\Login\login_btn.png" />
+    <Content Include="Content\Css\Login\login_foot_bg.png" />
+    <Content Include="Content\Css\Login\login_head_bg.png" />
+    <Content Include="Content\Css\Login\login_main_bg.png" />
+    <Content Include="Content\Css\Login\main_four.jpg" />
+    <Content Include="Content\Css\Login\main_one.jpg" />
+    <Content Include="Content\Css\Login\main_three.jpg" />
+    <Content Include="Content\Css\Login\main_two.jpg" />
+    <Content Include="Content\Css\Login\pwd_sign.png" />
+    <Content Include="Content\Css\Login\uid_sign.png" />
+    <Content Include="Content\Css\Login\vertical_line.png" />
+    <Content Include="Content\Css\Site.css" />
+    <Content Include="Content\Css\SiteIndex.css" />
+    <Content Include="Content\Css\style.brown.css" />
+    <Content Include="Content\Css\style.default.css" />
+    <Content Include="Content\Css\style.green.css" />
+    <Content Include="Content\Css\style.navyblue.css" />
+    <Content Include="Content\Css\style.palegreen.css" />
+    <Content Include="Content\Css\style.red.css" />
+    <Content Include="Content\Img\Digital.png" />
+    <Content Include="Content\Img\Jian.png" />
+    <Content Include="Content\Img\LED大屏系统.png" />
+    <Content Include="Content\Img\Logo.png" />
+    <Content Include="Content\Img\More.png" />
+    <Content Include="Content\Img\class.png" />
+    <Content Include="Content\Img\Pro.png" />
+    <Content Include="Content\Img\Pro_active.png" />
+    <Content Include="Content\Img\Setup.png" />
+    <Content Include="Content\Img\Stu.png" />
+    <Content Include="Content\Img\Stu_active.png" />
+    <Content Include="Content\Img\Tea.png" />
+    <Content Include="Content\Img\Tea_active.png" />
+    <Content Include="Content\Img\Tsit.png" />
+    <Content Include="Content\Img\UserBU.png" />
+    <Content Include="Content\Img\UserRen.png" />
+    <Content Include="Content\Img\UserSchool.png" />
+    <Content Include="Content\Img\停车库管理系统.png" />
+    <Content Include="Content\Img\图书管理系统.png" />
+    <Content Include="Content\Img\教学仪器管理系统.png" />
+    <Content Include="Content\Img\数字校园.png" />
+    <Content Include="Content\Img\无线数字广播系统.png" />
+    <Content Include="Content\Img\校务管理系统.png" />
+    <Content Include="Content\Img\校园电视台系统.png" />
+    <Content Include="Content\Img\物联网系统.png" />
+    <Content Include="Content\Img\监控系统.png" />
+    <Content Include="Content\Img\精品录课系统.png" />
+    <Content Include="Content\xinjiemian\404.png" />
+    <Content Include="Content\xinjiemian\addImgs.png" />
+    <Content Include="Content\xinjiemian\addImgs2.png" />
+    <Content Include="Content\xinjiemian\addImgs3.jpg" />
+    <Content Include="Content\xinjiemian\barmenu.png" />
+    <Content Include="Content\xinjiemian\bg1.png" />
+    <Content Include="Content\xinjiemian\breadcrumbs.jpg" />
+    <Content Include="Content\xinjiemian\btnbg.png" />
+    <Content Include="Content\xinjiemian\btnbg1.png" />
+    <Content Include="Content\xinjiemian\btnbg2.png" />
+    <Content Include="Content\xinjiemian\btnImg.png" />
+    <Content Include="Content\xinjiemian\buttonbg.png" />
+    <Content Include="Content\xinjiemian\cbg.png" />
+    <Content Include="Content\xinjiemian\CHAOSHI.png" />
+    <Content Include="Content\xinjiemian\chosen-sprite.png" />
+    <Content Include="Content\xinjiemian\clist.png" />
+    <Content Include="Content\xinjiemian\cloud.png" />
+    <Content Include="Content\xinjiemian\Contract.png" />
+    <Content Include="Content\xinjiemian\controls.png" />
+    <Content Include="Content\xinjiemian\datouxia.png" />
+    <Content Include="Content\xinjiemian\datouzuo.png" />
+    <Content Include="Content\xinjiemian\datouzuohei.png" />
+    <Content Include="Content\xinjiemian\diskbg.png" />
+    <Content Include="Content\xinjiemian\dp.png" />
+    <Content Include="Content\xinjiemian\droparrow.png" />
+    <Content Include="Content\xinjiemian\glyphicons-halflings-white.png" />
+    <Content Include="Content\xinjiemian\glyphicons-halflings.png" />
+    <Content Include="Content\xinjiemian\Home.png" />
+    <Content Include="Content\xinjiemian\Homelink.jpg" />
+    <Content Include="Content\xinjiemian\ibtnbg.png" />
+    <Content Include="Content\xinjiemian\iconsweets-icons-white.png" />
+    <Content Include="Content\xinjiemian\iconsweets-icons.png" />
+    <Content Include="Content\xinjiemian\Index_logo.png" />
+    <Content Include="Content\xinjiemian\inputbg.gif" />
+    <Content Include="Content\xinjiemian\ipd.png" />
+    <Content Include="Content\xinjiemian\itabbg.png" />
+    <Content Include="Content\xinjiemian\itabbg1.png" />
+    <Content Include="Content\xinjiemian\jiantou.png" />
+    <Content Include="Content\xinjiemian\jtx.png" />
+    <Content Include="Content\xinjiemian\lbg.png" />
+    <Content Include="Content\xinjiemian\lbg1.png" />
+    <Content Include="Content\xinjiemian\lc00.png" />
+    <Content Include="Content\xinjiemian\leftline.gif" />
+    <Content Include="Content\xinjiemian\leftmenubg.gif" />
+    <Content Include="Content\xinjiemian\leftpanelbg.png" />
+    <Content Include="Content\xinjiemian\lefttop.gif" />
+    <Content Include="Content\xinjiemian\libg.png" />
+    <Content Include="Content\xinjiemian\light.png" />
+    <Content Include="Content\xinjiemian\light1.png" />
+    <Content Include="Content\xinjiemian\line.gif" />
+    <Content Include="Content\xinjiemian\line1.png" />
+    <Content Include="Content\xinjiemian\list.gif" />
+    <Content Include="Content\xinjiemian\list1.gif" />
+    <Content Include="Content\xinjiemian\list2.png" />
+    <Content Include="Content\xinjiemian\loginbg1.png" />
+    <Content Include="Content\xinjiemian\loginbg2.png" />
+    <Content Include="Content\xinjiemian\loginbg3.png" />
+    <Content Include="Content\xinjiemian\loginbg4.png" />
+    <Content Include="Content\xinjiemian\logininfo.png" />
+    <Content Include="Content\xinjiemian\logininfo1.png" />
+    <Content Include="Content\xinjiemian\loginpassword.png" />
+    <Content Include="Content\xinjiemian\loginsj.png" />
+    <Content Include="Content\xinjiemian\loginuser.png" />
+    <Content Include="Content\xinjiemian\logo.png" />
+    <Content Include="Content\xinjiemian\logo11.png" />
+    <Content Include="Content\xinjiemian\meixjiantou.png" />
+    <Content Include="Content\xinjiemian\meixuanzhong.png" />
+    <Content Include="Content\xinjiemian\menuarrow.png" />
+    <Content Include="Content\xinjiemian\Metting.png" />
+    <Content Include="Content\xinjiemian\Money.png" />
+    <Content Include="Content\xinjiemian\MyPro.png" />
+    <Content Include="Content\xinjiemian\MyTask.png" />
+    <Content Include="Content\xinjiemian\navbg.png" />
+    <Content Include="Content\xinjiemian\new.png" />
+    <Content Include="Content\xinjiemian\next.gif" />
+    <Content Include="Content\xinjiemian\one.png" />
+    <Content Include="Content\xinjiemian\out.png" />
+    <Content Include="Content\xinjiemian\overlay.png" />
+    <Content Include="Content\xinjiemian\PassWord.png" />
+    <Content Include="Content\xinjiemian\PayMoney.png" />
+    <Content Include="Content\xinjiemian\pre.gif" />
+    <Content Include="Content\xinjiemian\ProName.png" />
+    <Content Include="Content\xinjiemian\ProName1.png" />
+    <Content Include="Content\xinjiemian\px.gif" />
+    <Content Include="Content\xinjiemian\RENWU.png" />
+    <Content Include="Content\xinjiemian\righttop.gif" />
+    <Content Include="Content\xinjiemian\rlist.gif" />
+    <Content Include="Content\xinjiemian\sanjiao.png" />
+    <Content Include="Content\xinjiemian\search.png" />
+    <Content Include="Content\xinjiemian\shanc.png" />
+    <Content Include="Content\xinjiemian\sj.png" />
+    <Content Include="Content\xinjiemian\small.png" />
+    <Content Include="Content\xinjiemian\sub-menu-icon.png" />
+    <Content Include="Content\xinjiemian\TaskWaring.png" />
+    <Content Include="Content\xinjiemian\tbg.png" />
+    <Content Include="Content\xinjiemian\tcbg.gif" />
+    <Content Include="Content\xinjiemian\th.gif" />
+    <Content Include="Content\xinjiemian\tianj.png" />
+    <Content Include="Content\xinjiemian\time.png" />
+    <Content Include="Content\xinjiemian\Tongji.png" />
+    <Content Include="Content\xinjiemian\toolbg.gif" />
+    <Content Include="Content\xinjiemian\top.jpg" />
+    <Content Include="Content\xinjiemian\top1.jpg" />
+    <Content Include="Content\xinjiemian\topbg.gif" />
+    <Content Include="Content\xinjiemian\top_xi.png" />
+    <Content Include="Content\xinjiemian\top_xi1.png" />
+    <Content Include="Content\xinjiemian\tou.png" />
+    <Content Include="Content\xinjiemian\ub1.png" />
+    <Content Include="Content\xinjiemian\uesrInfo.png" />
+    <Content Include="Content\xinjiemian\uew_icon.png" />
+    <Content Include="Content\xinjiemian\uew_icon_hover.png" />
+    <Content Include="Content\xinjiemian\ulist.png" />
+    <Content Include="Content\xinjiemian\updown.jpg" />
+    <Content Include="Content\xinjiemian\updown.png" />
+    <Content Include="Content\xinjiemian\user.png" />
+    <Content Include="Content\xinjiemian\userbg.png" />
+    <Content Include="Content\xinjiemian\warning.png" />
+    <Content Include="Content\xinjiemian\XINXI.png" />
+    <Content Include="Content\xinjiemian\xuanzhong.png" />
+    <Content Include="Content\xinjiemian\YUJING.png" />
+    <Content Include="Content\xinjiemian\yzmbg.png" />
+    <Content Include="main.html" />
+    <Content Include="Scripts\Menu.js" />
+    <Content Include="Content\Css\Nine.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\.DS_Store" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\G.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\html5.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Page.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\WEB\Home.js" />
+    <Content Include="Scripts\WEB\Link.js" />
+    <Content Include="Scripts\WEB\Login.js" />
+    <Content Include="Scripts\WEB\WebJs.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.CheckUserLoginBookItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.CheckUserLoginDeviceItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.CheckUserLoginInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.CheckUserLoginTokenItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.DeleteDIPCISClientInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.DeleteDIPCISRecordInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetAdminCardByRoleCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetDictListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetDIPCISClientListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetDIPCISRecordListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetECCDeviceClassItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetECCDeviceClassListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetECCUserClassListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetECCUserRoleInfoListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetLessonWeekInfoListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetStudentDataByCustomerCardSN2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetStudentDataByCustomerCardSNResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetStudentDataByDiningCardCode2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetStudentDataByDiningCardCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetUserDataByCustomerCardSNResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetUserDataByDiningCardCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetUserDataByUserCodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.GetUserDiningCardDataListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.InsertDIPCISClientInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.InsertDIPCISRecordInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.InsertUserICCardRecordInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.SubmitLeaveApplyItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.UpdateClassPushIDResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\EastEliteICMSWS\EastElite.EastEliteICMSWS.UpdateDIPCISClientInfoItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\EastEliteICMSWS\EastEliteICMSWS.disco">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EastEliteICMSWS\configuration91.svcinfo">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EastEliteICMSWS\configuration.svcinfo">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EastEliteICMSWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Service References\EastEliteICMSWS\EastEliteICMSWS.wsdl">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Link\List.cshtml" />
+    <Content Include="Views\Shared\MP.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Home\Login2.cshtml" />
+    <Content Include="Views\Link\Add.cshtml" />
+    <Content Include="Views\Link\Edit.cshtml" />
+    <Content Include="Views\Link\Pai.cshtml" />
+    <Content Include="Views\VidoLogin\Login.cshtml" />
+    <Content Include="Views\Role\RoleList.cshtml" />
+    <Content Include="Views\Role\Add.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\UserRoleInfo\UserRoleSeachList.cshtml" />
+    <Content Include="Views\UserRoleInfo\UserRoleList.cshtml" />
+    <Content Include="Views\Userlog\loglist.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Ajax\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EastEliteICMSWS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{351407a5-e905-4ab6-8cc2-9c088663d913}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6339</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:6340/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

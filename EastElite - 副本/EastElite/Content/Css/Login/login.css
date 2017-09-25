@@ -1,0 +1,316 @@
+*{
+	font-family:'Microsoft Yahei', '微软雅黑', '宋体';
+}
+.pic-box{
+	position: fixed;
+	z-index: -999;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;
+	width:100%;height:100%;
+}
+.pic-box img{
+	width:100%;height:100%;
+}
+.pic-box li{
+	list-style-type: none;
+	height:100%;width:100%;
+}
+
+.top-bar {
+    left: 50%;
+    margin: 0 0 0 -497px;
+    position: absolute;
+    top: 0;
+    width: 994px;
+    z-index: 1000;
+}
+.snav{
+	padding-top: 16px;
+	height: 23px;
+    line-height: 23px;
+    color: #fff;
+    font-size: 14px;
+}
+.snav span {
+    color: #fff;
+    padding: 0 5px;
+}
+a {
+	color: #fff;	
+	text-decoration:none;
+}
+.login-foot{
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    z-index: 1000;
+    height: 50px;
+    line-height: 50px;
+    border:1px solid #888888; 
+    border-width:1px 0 0 0;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+.login-area{
+	position:absolute; 
+	top:35%; left:50%; z-index:1001;
+	width:381px;
+	margin-left:-190px;margin-top:-105px;
+	/*background:url("../images/login_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);*/
+}
+.la-logo-tab{
+	/*padding: 14px 0px 0px 35px;*/
+	height: 64px; overflow:hidden;
+	width: 100%;
+	line-height: 46px;
+	background:url("/Content/Css/Login/login_head_bg.png") no-repeat scroll 0 0; position:relative;
+}
+.la-logo-sel { 
+    position:absolute;top:45px; right:25px; height:30px; width:130px; z-index:999;
+}
+.la-logo-sel div{
+margin-right:5px; cursor:pointer; float: left; width: 37px; height: 24px; 
+    }
+.la-logo-sel-tea {background-image: url('/Content/Img/Tea.png');
+}
+.la-logo-sel-stu {background-image: url('/Content/Img/stu.png');
+}
+.la-logo-sel-pro {background-image: url('/Content/Img/pro.png');
+}
+.tea-active {background-image: url('/Content/Img/Tea_active.png');
+}
+.stu-active {background-image: url('/Content/Img/stu_active.png');
+}
+.pro-active {background-image: url('/Content/Img/pro_active.png');
+}
+.la-logo-tab .la-logo{
+	display: inline-block;
+	height: 46px;
+	width: 200px;
+	background: url('/Content/Css/Login/login-logo.png') no-repeat scroll 0% 0% transparent;
+	position: relative;
+	margin:14px 0px 0px 35px;
+	top: 3px;
+}
+.loginFormIpt{
+	position: relative;
+	width: 312px;
+	height: 42px;
+	line-height: 42px;
+	margin: 14px 0px 0px 35px;
+	clear: both;
+	z-index: 1000;
+	background-image: url('/Content/Css/Login/loginIpt.png');
+}
+.loginFormValidate{
+	position: relative;
+	width: 176px;
+	height: 42px;
+	line-height: 42px;
+	margin: 14px 0px 0px 35px;
+	clear: both;
+	z-index: 1000;
+	background-image: url('/Content/Css/Login/validateIpt.png');
+}
+.loginFormValidate-none{
+	position: relative;
+	width: 176px;
+	height: 42px;
+	line-height: 42px;
+	margin: 14px 0px 0px 35px;
+	clear: both;
+	z-index: 1000;
+}
+
+.loginFormIpt .icoipt {
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    z-index: 1000;
+}
+.loginFormValidate .icoipt{
+	position: absolute;
+    left: 7px;
+    top: 7px;
+    z-index: 1000;
+}
+.ico-userid{
+	width: 28px;
+	height: 28px;
+	background-image: url('/Content/Css/Login/uid_sign.png');
+}
+.ico-pwd{
+	width: 28px;
+	height: 28px;
+	background-image: url('/Content/Css/Login/pwd_sign.png');
+}
+.ico-validate{
+	width: 28px;
+	height: 28px;
+	background-image: url('/Content/Css/Login/validate_sign.png');
+}
+.vertical_line{
+    position: absolute;
+	width: 1px;
+	height: 23px;
+	left: 42px;
+	top: 10px;
+	background-image: url('/Content/Css/Login/vertical_line.png');
+}
+.pass-text-input {
+	position: absolute;
+    margin-left: 50px;
+    border: 0px none;
+    font-size: 16px;
+    width:250px;
+    height:26px;
+    margin-top:8px;
+}
+.forgetpwd{
+	position: relative;
+	height: 24px;
+	line-height: 24px;
+	margin: 5px 0px 5px 35px;
+	width: 312px;
+}
+.forgetpwd-href{
+	color: #333;
+	float: right;
+	font-size: 14px;
+}
+.serviceInfo{
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+    margin: 5px 0px 5px 35px;
+    width: 312px;
+}
+.loginFormbtn{
+	display:inline-block;
+	margin:14px 0px;
+	width: 312px;
+	height: 42px;
+	line-height: 42px;
+	z-index: 1000;
+	cursor:pointer;
+	color:#FFF;
+	font-size:18px;
+	text-align:center;
+	vertical-align:top;
+	background-image: url('/Content/Css/Login/login_btn.png') ; 
+    background-color:#547ce7;
+    border:none;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    
+}
+.middle{
+	width:100%; height:auto; 
+	overflow:hidden;
+	background:url("/Content/Css/Login/login_main_bg.png") repeat scroll 0 0;
+}
+.la-logo-foot{
+	width:381px;
+	height: 81px;
+	text-align:center;
+	/*background:url("/Content/Css/Login/login_foot_bg.png") no-repeat scroll 0 0;*/
+}
+.picker-bar a{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 10px;
+	background: url('/Content/Css/Login/login-banner-picker.png') no-repeat;
+	_background: url('/Content/Css/Login/login-banner-picker.gif') no-repeat;
+	z-index: 1000;
+}
+.picker-bar a.active{
+	background: url('/Content/Css/Login/login-banner-picker-active.png') no-repeat;
+	_background: url('/Content/Css/Login/login-banner-picker-active.gif') no-repeat;
+	z-index: 1000;
+}
+.picker-bar{
+	margin:auto;
+	position: fixed;
+    bottom: 60px;
+    width: 100%;
+    z-index: 999;
+    text-align: center;
+}
+.infoMsg-area{
+	float: left;
+	color: red;
+	font-size: 14px;
+}
+
+.v-error{
+	color: red;
+}
+
+.middle .logout{
+	width:80%;
+	height:130px;
+	margin-top:60px;
+	font-size:14px;
+}
+
+.middle .logout-sign{
+	position: absolute;
+    margin-left: 50px;
+	width:61px;
+	height:68px;
+	background-image: url('../images/logout-sign.png');
+}
+
+
+.login-again-btn{
+	display:inline-block;
+	width: 146px;
+	height: 42px;
+	line-height: 42px;
+	z-index: 1000;
+	cursor:pointer;
+	color:#FFF;
+	font-size:20px;
+	text-align:center;
+	vertical-align:top;
+	background-image: url('../images/login-again-btn.png');
+}
+.close-browse-btn{
+	display:inline-block;
+	width: 146px;
+	height: 42px;
+	line-height: 42px;
+	z-index: 1000;
+	cursor:pointer;
+	color:#FFF;
+	font-size:20px;
+	text-align:center;
+	vertical-align:top;
+	background-image: url('../images/close-browse-btn.png');
+}
+.flex-control-nav{
+	position:fixed;
+	bottom:60px;
+	z-index:999;
+	width:100%;
+	text-align:center;
+	margin: auto;
+}
+.flex-control-nav li{display:inline-block;*display:inline;}
+.flex-control-nav a{
+	display:inline-block;
+	margin: 10px;
+	width:10px;
+	height:10px;
+	line-height:40px;
+	overflow:hidden;
+	background:url('/Content/Css/Login/login-banner-picker.png') no-repeat;cursor:pointer;
+}
+.flex-control-nav .flex-active{
+	background: url('/Content/Css/Login/login-banner-picker-active.png') no-repeat;
+	z-index:999;
+}

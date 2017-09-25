@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NETDISKDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Link">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="oaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="link" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="sort" Type="Int32" />
+    <Property Name="img" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="MenuCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OaRole">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LinkCode" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="RoleCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="NETDISKDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Link" EntityType="Self.Link" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" />
+    <EntitySet Name="OaRole" EntityType="Self.OaRole" />
+    <EntitySet Name="UserLog" EntityType="NETDISKDBModel.UserLog" />
+  </EntityContainer>
+  <EntityType Name="UserLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LogName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LogNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LogCreatTime" Type="DateTime" Precision="3" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Boolean" />
+  </EntityType>
+</Schema>

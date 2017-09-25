@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Usage";
+    Layout = "~/Views/Shared/MP.cshtml";
+}
+<div class="maincontent">
+    <div class="maincontentinner">
+        <div role="grid" class="dataTables_wrapper" id="dyntable_wrapper">
+            <div id="dyntable_length" class="dataTables_length">
+                &nbsp;
+            </div>
+            <div class="dataTables_filter" id="dyntable_filter" style="margin:0px;padding:0px">
+                <span style="float: left;">校区 </span>
+                <select id="txtName" style="float: left; margin-left:10px;">
+                    <option value="">请选择</option>
+                    <option value="6101051006">校本部</option>
+                    <option value="6101051007">东校区</option>
+                </select>
+                <span style="float: left; margin-left: 10px;">年级</span>
+                <select id="GradeCode" style="float: left; margin-left:10px;"></select>
+                <span style="float: left; margin-left: 10px;">班级</span>
+                <select id="ClassCode" style="float: left; margin-left:10px;"></select>
+                <label class="btn" style="float: right; padding: 1px 6px 0px;" id="btnSearch">查询</label>
+            </div>
+        </div>
+        <table class="gridView table table-bordered responsive dataTable" width="100%">
+            <tr>
+                <th align="center" width="7%" class="head0">校区</th>
+                <th align="center" width="14%" class="head0">班级</th>
+                <th align="center" width="9%" class="head0">设备编号</th>
+                <th align="center" width="25%" class="head0">JPushID</th>
+                <th align="center" width="12%" class="head0">每日使用时长</th>
+                <th align="center" class="head0">每日使用率</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div id="popup_overlay" style="position: absolute; z-index: 99998; display: none; top: 0px; left: 0px; width: 100%;  background: none repeat scroll 0% 0% rgb(255, 255, 255); opacity: 0.01;"></div>
+
+<!--弹出层  删除-->
+<div id="popup_container" style="position: fixed; z-index: 99999; padding: 0px; display: none; margin: 0px; min-width: 300px; max-width: 300px;" class="ui-draggable">
+</div>
+
+@section Script
+    {
+    <script src="~/Scripts/Page.js"></script>
+    <style>
+        *::after, *::before { box-sizing: border-box; }
+        *::after, *::before { box-sizing: border-box; }
+        .progress { background-color: #f5f5f5; position: relative; border-radius: 4px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset; height: 20px; overflow: hidden; }
+        * { box-sizing: border-box; }
+        .progress-bar { background-color: #337ab7; box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset; float: left; font-size: 12px; height: 100%; line-height: 20px; text-align: center; transition: width 0.6s ease 0s; width: 0; }
+        .sr-only { border: 0 none; height: 20px; overflow: hidden; padding: 0; width: 45px; text-align: center; position: absolute; top: 0px; left: 45%; z-index: 55; }
+    </style>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        var Url = "http://222.179.45.117:8002";
+        $(function () {
+            Query(1);
+            var userCode = '@ViewBag.User.userCode';
+            var rootCode = '@ViewBag.User.rootCode';
+            GetGradeCode(userCode, rootCode);
+            $("#ClassCode").append("<option selected=\"selected\" value=\"\">请选择</option>");
+            $("#GradeCode").change(function () {
+                GetClassCode(userCode, rootCode);
+            })
+        })
+        ///分页检索
+        ///参数pageIndex：页码
+        function Query(pageIndex) {
+            var values = ["CampusName", "ClassName", "DeviceCode", "JPushID", "SwitchDatelong", "UseIngLv"];//列对应的字段值
+            var postUrl = "/Ajax/GetElectronicData";
+
+            GetElectronicData(postUrl, values, pageIndex);
+        }
+        function SwitchDate(Model) {
+            var Time = (Model.SwitchDate == "" ? "6:30-21:30" : Model.SwitchDate).split('-');
+
+            var H = parseFloat(Time[1].split(':')[0]) - parseFloat(Time[0].split(':')[0]);
+            var M = parseFloat(Time[1].split(':')[1]) - parseFloat(Time[0].split(':')[1]);
+            var MC = H * 60 + M;
+            UseIngLv = parseFloat((parseFloat(MC) / 1440) * 100).toFixed(2);
+            var Lu = "<td align=\"center\"><div class=\"progress\">";
+            Lu += "<div style=\"width: " + UseIngLv + "%;\" aria-valuemax=\"100\" aria-valuemin=\"0\" aria-valuenow=\"60\" role=\"progressbar\" class=\"progress-bar\">";
+            Lu += "</div>";
+            if ( parseFloat(UseIngLv) > 62) {
+                Lu += "<span class=\"sr-only\" style=\"color: #fff;\" >" + UseIngLv + "%</span>";
+            } else {
+                Lu += "<span class=\"sr-only\" style=\"\" >" + UseIngLv + "%</span>";
+            }
+            Lu += "</div></td> ";
+            return "<td align=\"center\">" + MC + "分钟</td>" + Lu;
+        }
+
+        $("#btnSearch").bind('click', function () {
+            Query(1);
+        })
+        //分页表格数据绑定
+        function GetElectronicData(postUrl, values, pageIndex) {
+            var userCode = '@ViewBag.User.userCode';
+            var rootCode = '@ViewBag.User.rootCode';
+            var ClassCode = $("#ClassCode").val();
+            var rootCode = $("#txtName").val();
+            var gradeCode = $("#GradeCode").val();
+            if (pageIndex <= 0) { pageIndex = 1; }
+            $.post(postUrl, {
+                ClassCode: ClassCode,
+                currentPage: pageIndex,
+                gradeCode: gradeCode,
+                rootCode: rootCode
+            }, function (e) {
+                var Data = JSON.parse(e);
+                pageIndex = Data.currentPage;
+                BondData(Data.data, values, pageIndex);//绑定数据
+                Page(pageIndex, Data.totalPage, values.length);//设置分页
+                GetH();
+            })
+        }
+        //年级
+        function GetGradeCode(userCode, rootCode) {
+            var postUrl = "/Ajax/GetGradeCode";
+            $.post(postUrl, {
+                rootCode: rootCode,
+                userCode: userCode
+            }, function (e) {
+                var Data = JSON.parse(e).data;
+                var result = "";
+                var GradeCode = $("#GradeCode");
+                for (var i = 0; i < Data.length; i++) {
+                    if (i == 0) {//当页码与选择框value相等时，设置状态为选中状态
+                        result = result + "<option selected=\"selected\" value=\"\">请选择</option>";
+                        result = result + "<option value=" + Data[i].gradeCode + ">" + Data[i].gradeName + "</option>";
+                    } else if (Data[i].gradeCode == "") {
+
+                    } else {
+                        result = result + "<option value=" + Data[i].gradeCode + ">" + Data[i].gradeName + "</option>";
+                    }
+                }
+                GradeCode.html(result);
+            })
+        }
+        //班级
+        function GetClassCode(userCode, rootCode) {
+            var postUrl = "/Ajax/GetClassCode";
+            var gradeCode = $("#GradeCode").val();
+            $.post(postUrl, {
+                rootCode: rootCode,
+                userCode: userCode,
+                gradeCode: gradeCode
+            }, function (e) {
+                var Data = JSON.parse(e).data;
+                var result = "";
+                var GradeCode = $("#ClassCode");
+                result = result + "<option selected=\"selected\" value=\"\">请选择</option>";
+                for (var i = 0; i < Data.length; i++) {
+                    if (Data[i].gradeCode != "") {
+                        result = result + "<option value=" + Data[i].ClassCode + ">" + Data[i].ClassName + "</option>";
+                    }
+                }
+                GradeCode.html(result);
+            })
+        }
+    </script>
+}
+

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "loglist";
+    Layout = "~/Views/Shared/MP.cshtml";
+
+}
+<div class="maincontent">
+    <div class="maincontentinner">
+        <div id="dyntable_wrapper" class="dataTables_wrapper" role="grid">
+            <div class="dataTables_length" id="dyntable_length">
+                &nbsp;
+            </div>
+
+        </div>
+        <table width="100%" class="gridView table table-bordered responsive dataTable">
+            <tbody>
+                <tr>
+                    <th width="80" align="center" class="head0">日志编号</th>
+                    <th width="100" align="center" class="head0">操作人</th>
+                    <th align="center" width="100" class="head0">日志名称</th>
+                    <th align="center" class="head0">日志内容</th>
+                    <th width="120" align="center" class="head0">操作时间</th>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section Script
+    {
+    <script src="~/Scripts/Page.js"></script>
+
+    <script type="text/javascript">
+        Query(1);
+        ///分页检索
+        ///参数pageIndex：页码
+        function Query(pageIndex) {
+            var values = ["Id", "UserName", "LogName", "LogNote", "LogCreatTime"];//列对应的字段值
+            var postUrl = '/Ajax/GetLog';
+            
+            GetData(postUrl, values, pageIndex, "");
+        }
+        //设置表格的操作列内的button
+        //参数model:本行数据
+        function SetOperate(model) {
+            var str = "<td align=\"center\">"
+            str += '<a class="btn btn-primary" style="color:#fff;" href="/Link/Edit?code=' + model.Code + '">更新</a>';
+            str += "<span class='btn btn-primary' style=\"color:#fff;\"onclick=\"Transfer('" + model.Code + "','系统')\">删除</span>";
+            str += "</td>";
+            return str;
+        }
+        function Delete(data) {
+            window.location.href = "Del?code=" + data;
+        }
+        $("#btnSearch").bind('click', function () {
+            Query(1);
+        })
+
+    </script>
+}
+

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NETDISKDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Link">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="oaName" Type="nvarchar" MaxLength="100" />
+    <Property Name="link" Type="nvarchar" MaxLength="100" />
+    <Property Name="sort" Type="int" />
+    <Property Name="img" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="int" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="MenuCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Url" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OaRole">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="LinkCode" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="UserLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LogName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LogNote" Type="nvarchar(max)" />
+    <Property Name="LogCreatTime" Type="datetime" />
+    <Property Name="State" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="NETDISKDBModelStoreContainer">
+    <EntitySet Name="Link" EntityType="Self.Link" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OaRole" EntityType="Self.OaRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserLog" EntityType="Self.UserLog" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

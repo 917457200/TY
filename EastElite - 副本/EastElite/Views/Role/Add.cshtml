@@ -1,0 +1,59 @@
+﻿@model  BLL.SMSModel.RoleInfo
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/MP.cshtml";
+}
+<body class="errorpage">
+
+    <div class="maincontent stdform">
+        <div class="maincontentinner widget">
+            <h4 class="widgettitle">添加系统角色</h4>
+            <div class="widgetcontent">
+                @using( Html.BeginForm( "Add", "Role", FormMethod.Post, new { enctype = "multipart/form-data" } ) )
+                {
+                    @Html.ValidationSummary( true )
+                    @Html.HiddenFor( model => model.Code )
+                    <div class="par control-group">
+                        <div class="label-left">角色名称</div>
+                        <div class="controls">
+                            @Html.TextBoxFor( model => model.Name, new { @class = "input1" } )
+                            <span style="color: red">*</span>
+                            @Html.ValidationMessageFor( model => model.Name )
+                        </div>
+                    </div>
+
+                    <div class="par control-group oh">
+                        <div class="label-left">
+                            系统权限
+                        </div>
+                        <div class="controls2">
+                            @foreach( var item in ViewBag.Link )
+                            {
+                                <div class="lingDiv">
+                                    <input type="checkbox" name="Link" id="Link@(item.Code)" value="@(item.Code)" />
+                                    <label for="Link@(item.Code)">@item.oaName</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="par control-group">
+                        <div class="label-left">
+                            备注
+                        </div>
+                        <div class="controls">
+                            @Html.TextBoxFor( model => model.Note, new { @class = "input1" } )
+                            <span style="color: red">*</span>
+                            @Html.ValidationMessageFor( model => model.Note )
+                        </div>
+                    </div>
+                    <p class="stdformbutton">
+                    <p class="stdformbutton" style="text-align:center;">
+                        <input class="btn" type="submit" style="display:inline-block;" value="提交" />
+                        <input class="btn" type="submit" style="display:inline-block;" onclick=" location.href = 'RoleList'; return false;" value="返回" />
+                    </p>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</body>
